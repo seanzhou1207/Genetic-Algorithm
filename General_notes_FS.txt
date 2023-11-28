@@ -1,0 +1,31 @@
+# 243 Project
+
+## Parameters
+
+- Chromosome length C (Given by Dataset)
+- Generation size P (bigger is better) (Ideally: C < P < 2C)
+- Mutation probability mu (ex. 1% or 1/C)
+- Termination criterion: Max number of iterations maxiter
+- Objective criterion / function: Default = AIC
+
+## **Required support functions:**
+
+- Mutation
+    - Inputs: Chromosome, (Parent Chromosomes?), Mu = Mutation probability
+    - Outputs: Mutated Chromosome
+- Genetic Operator (Crossover)
+    - Inputs: Chromosome parent 1, Chromosome parent 2, Method = Simple random split … more params
+    - Outpus: Children chromosomes (1, 2)
+- Rank
+    - Inputs: Generation t (P Chromosomes), Objective function
+    - Fixed?: Rank based method
+    - Outputs: Generation t (P Chromosomes) and their respective Fitness-Score
+- Selection
+    - Inputs: Generation t (P Chromosomes) and their respective Fitness-Score, … further selection parameters
+    - Outpus: Parents selected for breeding before Crossover (Ordered pairs?)
+
+## 
+
+## Other considerations
+
+- Dealing with duplicates
