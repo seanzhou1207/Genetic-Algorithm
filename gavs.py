@@ -1,16 +1,50 @@
-import numpy
+import numpy as np
+import pandas as pd
 import random
+from typing import Union
 
 class GA ():
+    supported_int_types = Union[int, np.int8, np.int16, np.int32, np.int64,
+                           np.uint, np.uint8, np.uint16, np.uint32, np.uint64]
+    supported_float_types = Union[float, np.float16, np.float32, np.float64]
     def __init__(self, 
-                pop_size, 
-                num_generations,
-                model,
+                X, 
+                y,
+                mod,
+                max_iter: int,
+                pop_size: int = None, 
                 fitness_func = "AIC",
-                starting_population = None
+                starting_population = None,
+                mutate_prob = 0.01,
+                save_sols = False,
+                random_seed = None,
                 ):
-        self.Y = model.endog
-        pass
+        self.random_seed = random_seed
+        if not random_seed:
+            pass
+        else:
+            np.random.seed(self.random_seed)
+            random.seed(self.random_seed)
+
+        self.C = X.shape[1]    # CHECK: this is assuming intercept column
+
+        if not pop_size:
+            self.pop_size = int(1.5 * self.C)    # C < P < 2C
+        else:
+            self.pop_size = pop_size
+
+        self.X = X
+        self.y = y
+        self.mod = mod
+        self.max_iter = max_iter
+        self.mutate_prob = mutate_prob
+        self.fitness_func = fitness_func
+        self.starting_population = starting_population
+
+        if save_sols == True:
+            self.solutions_matrix = np.zeros((self.max_iter, self.C))    # Pre-specify matrix for storing solutions
+        else:
+            pass
 
     def initialize_pop(self):
         pass
