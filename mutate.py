@@ -1,16 +1,28 @@
+""" 
+Mutation module with genetic operator "mutation"
+"""
 import numpy as np
 
-rng = np.random.default_rng(seed=1)
+class mutation:
+    
+    def __init__():
+        pass
 
+    def random_mutate():
+        
+        """
+        Randomly switches genes (bit switch) in generation with probability mutate_prob
 
-def mutate(G, mu):
-    G_new = G.copy()
-    mutation_locs = rng.binomial(1, mu, size = G.shape)
-    mask = mutation_locs == 1
-    G_new[mask] = 1 - G_new[mask] # flip bits using the mask
-    return G_new
+        Inputs: Generation of organisms - Size: (pop_size x C (number of predictors))
+        Outputs: Generation of mutated organisms of same size
+        
+        """
 
-
-# questions: how to pass the RNG?
-# This works on full Generations!
-# needs to be converted to class
+    # initialize random generator
+    rng = np.random.default_rng()
+    
+    population_new = self.current_population.copy()
+    mutation_locations = rng.binomial(1, self.mutate_prob, size = current_population.shape)
+    mask = mutation_locations == 1
+    population_new[mask] = 1 - population_new[mask] # flip bits using the mask
+    return population_new
