@@ -40,6 +40,7 @@ class GA ():
         self.mutate_prob = mutate_prob
         self.fitness_func = fitness_func
         self.starting_population = starting_population
+        self.current_population = None
 
         if save_sols == True:
             self.solutions_matrix = np.zeros((self.max_iter, self.C))    # Pre-specify matrix for storing solutions
@@ -47,8 +48,15 @@ class GA ():
             pass
 
     def initialize_pop(self):
-        pass
-
+        if not self.starting_population:    # Specify a starting pop
+            rows = self.pop_size
+            cols = self.C
+            self.starting_population = np.random.choice([0, 1], size=(rows, cols))    # Complete random generation
+            
+            return self.starting_population
+        else:
+            return self.starting_population
+ 
     def calculate_fit(self):
         pass
 
