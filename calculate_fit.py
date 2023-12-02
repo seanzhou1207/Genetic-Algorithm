@@ -11,6 +11,16 @@ class calculate_fit:
     def __init__():
         pass
     
+    def calc_fit_sort_population(self, current_population):
+        """
+        Calculated fitness of organisms and sorts population based on fitness score (AIC). From low AIC (best) to high.
+        
+        Inputs: Current population
+        Outputs: Sorted population, sorted fitness scores
+        """
+        
+        fitness_scores = calculate_fit_of_population(current_population)
+        return sort_population(current_population, fitness_scores)
     
     def sort_population(self, current_population, fitness_scores):
         """
@@ -25,7 +35,7 @@ class calculate_fit:
         return current_population[sort_index], fitness_scores[sort_index]
     
     
-    def calculate_fit_per_organism(self, current_population):
+    def calculate_fit_of_population(self, current_population):
         """
         Calculates fitness of all organism in generation.
         
