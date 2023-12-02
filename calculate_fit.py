@@ -12,25 +12,43 @@ class calculate_fit:
         pass
     
     
-
+    def sort_population(self, current_population, fitness_scores):
+        """
+        Sorts population based on fitness score (AIC). From low AIC (best) to high.
+        
+        Inputs: Current population, Fitness scores per organism
+        Outputs: Sorted population, sorted fitness scores
+        """
+        
+        sort_index = np.argsort(fitness_scores)
+        
+        return current_population[sort_index], fitness_scores[sort_index]
+    
+    
+    def calculate_fit_per_organism(self, current_population):
+        """
+        Calculates fitness of all organism in generation.
+        
+        Inputs: Current population
+        Outputs: Fitness score per organism
+        """
+        fitness_scores = []
+        for organism in current_population:
+            X_trimmed = select_features(organism)
+            fitness_scores.append(calculate_fit_per_organism(X_trimmed))
+        return np.array(fitness_scores)
+        
+            
     def calculate_fit_per_organism(self, X_trimmed):
          """
         Calculates fitness of one organism based on trimmed data according to its allels.
         
         Inputs: Trimmed data
         Outputs: Fitness score of organism
-        
         """
         
-        mod_fitted = self.mod(self.y, X_trimmed).fit()
-        
-        if self.fitness_func == "AIC":
-            fitness = mod_fitted.aic
-        else:
-            print("Fitness function is not AIC")
-            pass
-            
-        return fitness
+        mod_fitted = self.mod(self.y, X_trimmed).fit() 
+        return mod_fitted.aic
         
         
     def select_features(self, organism):
@@ -39,9 +57,7 @@ class calculate_fit:
         
         Inputs: Single organism - Size: (1 x C (number of predictors))
         Outputs: Data to be used for fitness calculation of this organism
-        
         """
       
-    X_trimmed = self.X.drop(columns=X.columns[organism == 0], axis=1)
-    
-    return X_trimmed
+        X_trimmed = self.X.drop(columns=X.columns[organism == 0], axis=1)
+        return X_trimmed
