@@ -19,11 +19,11 @@ class mutation:
         
         """
 
-    # initialize random generator
-    rng = np.random.default_rng()
-    
-    population_new = current_population.copy()
-    mutation_locations = rng.binomial(1, self.mutate_prob, size = current_population.shape)
-    mask = mutation_locations == 1
-    population_new[mask] = 1 - population_new[mask] # flip bits using the mask
-    return population_new
+        # initialize random generator
+        rng = np.random.default_rng()
+        
+        population_new = current_population.copy()
+        mutation_locations = rng.binomial(1, self.mutate_prob, size = current_population.shape)
+        mask = mutation_locations == 1
+        population_new[mask] = 1 - population_new[mask] # flip bits using the mask
+        return population_new
