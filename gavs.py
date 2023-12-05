@@ -3,7 +3,12 @@ import pandas as pd
 import random
 from typing import Union
 
-class GA ():
+from utils import calculate_fit
+from utils import parent_select
+
+class GA (calculate_fit.calculate_fit,
+          parent_select.ParentSelection
+        ):
     supported_int_types = Union[int, np.int8, np.int16, np.int32, np.int64,
                            np.uint, np.uint8, np.uint16, np.uint32, np.uint64]
     supported_float_types = Union[float, np.float16, np.float32, np.float64]

@@ -16,6 +16,8 @@
 - Genetic Operator (Crossover)
     - Inputs: Chromosome parent 1, Chromosome parent 2, Method = Simple random split … more params
     - Outpus: Children chromosomes (1, 2)
+
+    create 
 - Rank
     - Inputs: Generation t (P Chromosomes), Objective function
     - Fixed?: Rank based method
