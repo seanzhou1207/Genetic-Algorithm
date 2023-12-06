@@ -1,0 +1,89 @@
+---
+format: pdf
+output:
+  pdf_document:
+    latex_engine: pdflatex
+    toc: true
+header-includes:
+  \usepackage{graphicx}
+  \usepackage{grffile}
+  \usepackage{xcolor}
+  \usepackage{fancyhdr}
+  \usepackage{amsmath}
+  \usepackage{fvextra}
+  \definecolor{BERKELEYBLUE}{cmyk}{100,71,10,47}
+  \definecolor{CALIFORNIAGOLD}{cmyk}{0,32,100,0}
+  \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+---
+
+<!---
+ Title Page Layout 
+--->
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\topmargin1mm
+\begin{center}
+\huge\textbf{Genetic Algorithm for Variable Selection}\par
+\vspace{1.75cm}
+\huge{STAT 243 - Final Project}\par
+\huge\textit{Fall 2023}\par
+\vspace{3cm}
+\large \textbf{Authors: Sean Zhou, Sun Moon, Frederik Stihler} \par
+\large Department of Statistics\par
+Instructor: Christopher Paciorek
+\par 
+\par 
+\vspace{1cm}
+\large December 13th, 2023\par
+\vspace{4cm}
+\includegraphics[width=0.4\textwidth]{Berkeley_logo.svg.png} %70% der Textbreite
+\end{center}
+\thispagestyle{empty}
+\newpage
+\fancyfoot[C]{\thepage}
+
+# 1. Introduction
+
+The goal of this project is to develop a genetic algorithm for variable selection, including both linear regression and GLMs. The results are consolidated in a Python package. The user can input a dataset (with covariates and corresponding responses), as well as the desired type of regression. The algortihm will perform the variable selection and tell the user which features to use.
+
+In general, variable selection is the process of selecting a subset of relevant predictors for the model creation. Variable selection generally decreases the model complexity, which can make it easier to interpret and also reduce computational complexity.
+
+Genetic algorithms (GA) are stochastic methods usually used for optimization or search problems. They utilize principles from biological evolution and natural selection, such as selection, crossover and mutation.
+
+
+# 2. Programming approach
+
+We identified the following main steps in the algorithm:
+
+1. Population initialization
+2. Evolution cycle for fixed number of iterations
+    - Fitness assessment and ranking
+    - Parent selection
+    - Genetic operators
+        - Crossover
+        - Mutation
+        - etc.
+3. Ouput fittest individual of final population
+
+Each (sub-)step was implemented as a modular component. We decided to use an object-oriented programming approach, which means that the individual steps are implemented as Python class methods. To keep the code organized in a logical order we  applied inheritance so that each step is defined in its own class. Then, these classes and methods are inherited by the parent class "GA", which has a primary method "select" that carries out the overall algorithm outlined above.
+
+# 3. Testing
+
+# 4. Results
+
+## 4.1 Example 1
+
+# 5. Contributions
+
+*Sun Moon* 
+Sun dedicated his efforts to the testing phase, crafting a comprehensive suite of tests to validate the algorithm. His contributions included developing test examples for the overall algorithm and implementing unit tests for individual functions using pytest. Additionally, Sun led the comparison with the Lasso method, offering valuable insights into the algorithm's performance.
+
+*Sean Zhou*
+Sean was responsible for structuring and developing core components of the algorithm. His tasks included for example working on the overall GA class, the primary function "select", and parent selection. Moreover, Sean managed the group's GitHub repository, ensuring effective collaboration and organization.
+
+*Frederik Stihler*
+Frederik was responsible for structuring and developing core components of the algorithm. He focused for example on essential functions within the algorithm's structure, such as mutation, crossover, and fitness calculation. In addtion, Frederik took charge of overseeing the creation of the final report, ensuring clarity and coherence.
+
+Finally, every team member performed code reviews of the other peers.
+
