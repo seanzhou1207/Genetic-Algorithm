@@ -57,6 +57,9 @@ class GA (calculate_fit.CalculateFit,
             pass
 
     def initialize_pop(self):
+        """
+        Creates the starting population
+        """
         if not isinstance(self.starting_population, np.ndarray):    # Specify a starting pop
             rows = self.pop_size
             if rows % 2 == 1:    # If pop_size is odd
@@ -65,29 +68,50 @@ class GA (calculate_fit.CalculateFit,
             cols = self.C
             self.starting_population = np.random.choice([0, 1], size=(rows, cols))    # Complete random generation
             
-            return self.starting_population
         else:
-            return self.starting_population
-     
+            pass
+            
+        self.starting_population = self.replace_zero_chromosome(self.starting_population)    # Replace chromosome of all zeros
+        
+        return self.starting_population
+
     def select(self, operator_list):
+        """
+        Runs variable selection based on a user-defined genetic operator sequence: operator_list
+        """
         starting_pop = self.initialize_pop()
         current_pop = starting_pop.copy()
 
         for i in range(self.max_iter):
+            # Calculates fitness and pairs parents
             chrom_ranked, fitness_val = self.calc_fit_sort_population(current_pop)
-            
             parents = self.select_from_fitness_rank(chrom_ranked)
             current_pop = parents
+
+            # Runs genetic operator sequence
             for method in operator_list:
                 new_population = method(current_pop)
                 current_pop = new_population
-            #old_pop = new_offspring.copy()
+            # Check if any chromosome of zeros and replace the row
+            current_pop = self.replace_zero_chromosome(current_pop)    
         
         final_pop = current_pop.copy()
-        final_pop_sorted, final_fitness_val = self.calc_fit_sort_population(final_pop)
+        self.final_pop_sorted, self.final_fitness_val = self.calc_fit_sort_population(final_pop)
         
-        return (final_pop_sorted, final_fitness_val)
+        return (self.final_pop_sorted[0], self.final_fitness_val[0])
+    
+    def replace_zero_chromosome(self, population):
+        """
+        Finds if any chromosome is all zeros, and replaces the zero rows with random 0,1s
+        """
+        while np.any((population == 0).all(axis=1)):
+            # Find the indices of rows with all zeros
+            zero_rows_indices = np.where((population == 0).all(axis=1))[0]
 
-
+            # Replace each zero row with a randomly generated 0,1 row
+            for row_index in zero_rows_indices:
+                population[row_index] = np.random.randint(0, 2, self.C)
+        
+        return population
             
 
