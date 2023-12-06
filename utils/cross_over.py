@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 
 
-class cross_over:
+class CrossOver:
     
     def __init__():
         pass
@@ -19,9 +19,9 @@ class cross_over:
         Outputs: Population of children (pairwise cross-over)
         """
         count = 0
-        new_population = np.zeros(current_population.shape)
+        new_population = np.zeros(current_population.shape).astype(int)
         for pair in np.arange(int(current_population.shape[0]/2)):
-            new_population[count], new_population[count+1] = split_and_glue(current_population[count], current_population[count+1])
+            new_population[count], new_population[count+1] = self.split_and_glue(current_population[count], current_population[count+1])
             count += 2
         return new_population
 
@@ -51,7 +51,7 @@ class cross_over:
         count = 0
         new_population = np.zeros(current_population.shape)
         for pair in np.arange(int(current_population.shape[0]/2)):
-            new_population[count], new_population[count+1] = random_allel_selection(current_population[count], current_population[count+1])
+            new_population[count], new_population[count+1] = self.random_allel_selection(current_population[count], current_population[count+1])
             count += 2
         return new_population
     

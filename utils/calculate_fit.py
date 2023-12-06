@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import statsmodels.api as sm
 
-class calculate_fit:
+class CalculateFit:
     
     def __init__():
         pass
@@ -47,7 +47,6 @@ class calculate_fit:
             X_trimmed = self.select_features(organism)
             fitness_scores.append(self.calculate_fit_per_organism(X_trimmed))
         return np.array(fitness_scores)
-        
             
     def calculate_fit_per_organism(self, X_trimmed):
         """
@@ -58,7 +57,6 @@ class calculate_fit:
         """
         mod_fitted = self.mod(self.y, X_trimmed).fit() 
         return mod_fitted.aic
-        
         
     def select_features(self, organism):
         """

@@ -4,7 +4,7 @@ Mutation module with genetic operator "mutation"
 
 import numpy as np
 
-class mutation:
+class Mutation:
     
     def __init__():
         pass
