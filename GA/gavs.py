@@ -70,12 +70,12 @@ class GA (_CalculateFit,
             starting_population: ndarray (random bool matrix used to sample self.X)
         """
         if not isinstance(self.starting_population, ndarray):    # Specify a starting pop
-            rows = self.pop_size
-            if rows % 2 == 1:    # If pop_size is odd
+            if self.pop_size % 2 == 1:    # If pop_size is odd
                 self.pop_size = self.pop_size + 1    # Only allow even number for population size
+                print(f"Original pop_size is odd - new pop_size: {self.pop_size}")
             
             cols = self.C
-            self.starting_population = np.random.choice([0, 1], size=(rows, cols))    # Complete random generation
+            self.starting_population = np.random.choice([0, 1], size=(self.pop_size, cols))    # Complete random generation
             
         else:
             pass
