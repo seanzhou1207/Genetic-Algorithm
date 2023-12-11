@@ -4,6 +4,8 @@ Module to calculate the fitness of the current generation
 from typing import List, Tuple
 from numpy import ndarray
 import numpy as np
+from statsmodels.regression.linear_model import RegressionModel
+import statsmodels.api as sm
 
 class _CalculateFit:
     
@@ -60,8 +62,17 @@ class _CalculateFit:
         Inputs: Trimmed data
         Outputs: Fitness score of organism
         """
-        mod_fitted = self.mod(self.y, X_trimmed).fit() 
-        return mod_fitted.aic
+        X_trimmed_w_intercept = sm.add_constant(X_trimmed)
+        mod = self.mod(self.y, X_trimmed_w_intercept)
+
+        # Check if the model is an instance of RegressionModel
+        if not isinstance(mod, RegressionModel):
+            raise TypeError(f"The model must be an instance of a statsmodels linear regression model. Instead it is {type(mod)}")
+        
+        #print(mod.fit().params)
+
+        aic = mod.fit().aic
+        return aic
         
     def select_features(self, organism: ndarray) -> ndarray:
         """
@@ -71,7 +82,7 @@ class _CalculateFit:
         Outputs: Data to be used for fitness calculation of this organism
         """
       
-        #X_trimmed = self.X.drop(columns=self.X.columns[organism == 0], axis=1)
-        X_trimmed = self.X[:, organism != 0]
+        X_trimmed = self.X.drop(columns=self.X.columns[organism == 0], axis=1)
+        #X_trimmed = self.X[:, organism != 0]
 
         return X_trimmed
