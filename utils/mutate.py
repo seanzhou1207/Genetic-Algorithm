@@ -3,14 +3,14 @@ Mutation module with genetic operator "mutation"
 """
 
 import numpy as np
-
-class Mutation:
+from numpy import ndarray
+class _Mutation:
     
-    def __init__():
+    def __init__(self):
         pass
 
-    def random_mutate(self, current_population):
-        
+    def random_mutate(self, current_population: ndarray, mutate_prob: float) -> ndarray:
+    
         """
         Randomly switches genes (bit switch) in generation with probability mutate_prob
 
@@ -23,7 +23,7 @@ class Mutation:
         rng = np.random.default_rng()
         
         population_new = current_population.copy()
-        mutation_locations = rng.binomial(1, self.mutate_prob, size = current_population.shape)
+        mutation_locations = rng.binomial(1, mutate_prob, size=current_population.shape)
         mask = mutation_locations == 1
-        population_new[mask] = 1 - population_new[mask] # flip bits using the mask
+        population_new[mask] = 1 - population_new[mask]  # flip bits using the mask
         return population_new
