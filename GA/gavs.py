@@ -1,6 +1,7 @@
 import random
 from functools import partial
 from typing import Callable, List
+import statsmodels.api
 
 import numpy as np
 from numpy import ndarray
@@ -27,6 +28,7 @@ class GA (_CalculateFit,
         ):
         """
         parameters:
+        --------
             X: design matrix (assuming no intercept column)
             y: outcome variable
             mod: regression model (statsmodels)
@@ -36,6 +38,30 @@ class GA (_CalculateFit,
             mutate_prob: GA mutation probability
             save_sols: ... TODO
             random_seed: random seed value
+
+        examples:
+        --------
+   ...: from GA import *
+   ...: import statsmodels.api as sm
+   ...: import numpy as np
+   ...: 
+   ...: spector_data = sm.datasets.spector.load()
+   ...: 
+   ...: X = spector_data.exog
+   ...: y = spector_data.endog
+   ...: 
+   ...: # Initialize GA class
+   ...: ga_1 = GA(X=X, y=y, mod=sm.OLS, max_iter=10, random_seed=1)
+   ...: 
+   ...: # Run GA under default operators
+   ...: final_pop, fit = ga_1.select()
+   ...: print(final_pop, fit)
+
+   ...: # Specify own operator, population size, and mutation probability
+   ...: operator = [GA.random_mutate, GA.random_mutate, GA.split_and_glue_population]
+   ...: ga_2 = GA(X=X, y=y, mod=sm.OLS, max_iter=10, pop_size = 4, mutate_prob=0.01, random_seed=12) TODO
+   ...: final_pop, fit = ga_2.select(operator)
+   ...: print(final_pop, fit)   
         """
         self.random_seed: int = random_seed
         if random_seed:
@@ -88,6 +114,9 @@ class GA (_CalculateFit,
         """
         Runs variable selection based on a user-defined genetic operator sequence: operator_list            
         """
+        """Set random seed"""
+        random.seed(self.random_seed)
+
         # set default mutation methods
         # assigns user specified operator_list if its not None
         operator_list = operator_list or [
