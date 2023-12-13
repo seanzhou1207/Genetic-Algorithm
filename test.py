@@ -49,5 +49,3 @@ sa = GA(X=X, y=y, mod=sm.OLS, max_iter=50, mutate_prob=0.01)
 sa.select()
 
 # Ideally, your GA should identify x1 and x2 as significant predictors
-
-
