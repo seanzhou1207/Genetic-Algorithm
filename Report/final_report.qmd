@@ -72,7 +72,9 @@ Each (sub-)step was implemented as a modular component. We decided to use an obj
 
 # 4. Results
 
-## 4.1 Example 1
+## 4.1 Example 1: Baseball data
+
+We first test the algorithm on the same dataset as used by Givens and Hoeting, the baseball salaries. 
 
 # 5. Contributions
 

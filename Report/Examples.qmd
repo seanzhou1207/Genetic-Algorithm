@@ -10,8 +10,7 @@ Load dataset:
 import pandas as pd 
 import statsmodels.api as sm
 
-data = pd.read_csv("baseball.dat", delimiter = ' ')
-print("Shape of data: ", data.shape)
+data = pd.read_csv("./GA/assets/baseball.dat", delimiter = ' ')
 
 X = data.drop("salary", axis = 1)
 y = data["salary"]
@@ -25,7 +24,6 @@ GA = GA(pop_size=26, X=X, y=y, mod=sm.OLS, max_iter=100)
 
 
 Plot (split and glue crossover):
-
 ```{python}
 import matplotlib.pyplot as plt
 
@@ -48,41 +46,13 @@ for i in range(GA.max_iter):
     # Check if any chromosome of zeros and replace the row
     current_pop = GA.replace_zero_chromosome(current_pop)    
 
-final_pop = current_pop.copy()
-GA.final_pop_sorted, GA.final_fitness_val = GA.calc_fit_sort_population(final_pop)
-
-a,b = (GA.final_pop_sorted[0], GA.final_fitness_val[0])
-
-
-```
-
-Plot (split and glue crossover):
-
-```{python}
-import matplotlib.pyplot as plt
-
-starting_pop = GA.initialize_pop()
-current_pop = starting_pop.copy()
-operator_list = [GA.random_allel_selection_population, GA.random_mutate]
-
-for i in range(GA.max_iter):
-    # Calculates fitness and pairs parents
-    chrom_ranked, fitness_val = GA.calc_fit_sort_population(current_pop)
-    parents = GA.select_from_fitness_rank(chrom_ranked)
-    current_pop = parents
-    plt.scatter([i]*len(fitness_val), fitness_val, color = "black", s=12)
-
-    # Runs genetic operator sequence
-    for method in operator_list:
-        new_population = method(current_pop)
-        current_pop = new_population
-    # Check if any chromosome of zeros and replace the row
-    current_pop = GA.replace_zero_chromosome(current_pop)    
+plt.ylabel("AIC")
+plt.xlabel("Generation")
+plt.title("Figure 1: Results of GA")
+plt.savefig("GA_results_plot_baseball.png")
 
 final_pop = current_pop.copy()
 GA.final_pop_sorted, GA.final_fitness_val = GA.calc_fit_sort_population(final_pop)
 
 a,b = (GA.final_pop_sorted[0], GA.final_fitness_val[0])
-
-
 ```
