@@ -1,17 +1,15 @@
 """ 
 Module to perform crossover (genetic operator) to the current generation
 """
-
 import numpy as np
-import pandas as pd
+from numpy import ndarray
 
-
-class CrossOver:
+class _CrossOver:
     
-    def __init__():
+    def __init__(self):
         pass
     
-    def split_and_glue_population(self, current_population):
+    def split_and_glue_population(self, current_population: ndarray) -> ndarray:
         """
         Performs split-and-glue crossover to current population (assuming 1&2 is paired, 3&4, etc.)
        
@@ -41,7 +39,7 @@ class CrossOver:
         return child1, child2
     
     
-    def random_allel_selection_population(self, current_population):
+    def random_allel_selection_population(self, current_population: ndarray) -> ndarray:
         """
         Performs random allel selection crossover to current population (assuming 1&2 is paired, 3&4, etc.)
        

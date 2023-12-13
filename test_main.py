@@ -1,7 +1,7 @@
 import pytest
 import statsmodels.api as sm
 import numpy as np
-from gavs import GA
+from GA.gavs import GA
 
 
 
