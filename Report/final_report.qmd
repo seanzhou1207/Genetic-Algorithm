@@ -89,7 +89,7 @@ The overall genetic algorithm was tested using simulated and actual datasets, in
 We first run the algorithm for the baseball salaries dataset. 
 
 \begin{center}
-\includegraphics[width=0.8\textwidth]{GA_results_plot_baseball.png}
+\includegraphics[width=0.7\textwidth]{GA_results_plot_baseball.png}
 \end{center}
 
 One hundred generations of size 26 were used. The data set includes 27 predictors for the response variable "salary", so the individual chromosomes consist of 27 binary genes. The genetic operators applied were simple split crossover and a mutation rate of 1% applied independently for each chromosome and each gene position. A clear evolution or "survival of the fittest" can be observed in figure 1. The AIC of the best model was found to be around 5373.6.
@@ -102,7 +102,7 @@ We also explored the algorithms performance on a simple simulated dataset. We dr
 Finally, the performance of the algorithm was compared to a Lasso regression (using the statsmodel package with regularization parameter $\alpha=0.1$). The Lasso method can perform variable selection by setting some of the coefficients to zero, which will "deselect" unimportant features.
 
 \begin{center}
-\includegraphics[width=0.8\textwidth]{Lasso_comparison.png}
+\includegraphics[width=0.7\textwidth]{Lasso_comparison.png}
 \end{center}
 
 The GA selected 10 predictors for the regression, meaning that 17 features where ignored. Comparing this to the coefficient sizes of the Lasso shows that similar features are considered relevant by the two models. In figure 2, the size of the horizontal bars indicates the importance of each feature (corresponding to the respective coefficient weights).
@@ -119,4 +119,9 @@ Sean was responsible for structuring and developing core components of the algor
 Frederik was responsible for structuring and developing core components of the algorithm. He focused for example on essential functions within the algorithm's structure, such as mutation, crossover, and fitness calculation. In addtion, Frederik took charge of overseeing the creation of the final report, including the examples and comparison with Lasso, ensuring clarity and coherence.
 
 Finally, every team member performed code reviews of the other peers.
+
+
+\newpage
+GitHub organization: github.com \par
+GitHub repository: https://github.com/seanzhou1207/Genetic-Algorithm
 
