@@ -92,7 +92,12 @@ We first test the algorithm on the same dataset as used by Givens and Hoeting, t
 \includegraphics[width=0.8\textwidth]{GA_results_plot_baseball.png}
 \end{center}
 
-One hundred generations of size 26 were used. The data set includes 27 predictors for the response variable "salary", so the individual chromosomes consist of 27 binary genes. The genetic operators applied were simple split crossover and a mutation rate of 1% applied independently for each chromosome and each gene position.
+One hundred generations of size 26 were used. The data set includes 27 predictors for the response variable "salary", so the individual chromosomes consist of 27 binary genes. The genetic operators applied were simple split crossover and a mutation rate of 1% applied independently for each chromosome and each gene position. A clear evolution or "survival of the fittest" can be observed in figure 1. The AIC of the best model was found to be around 5373.6.
+
+## 4.2 Example 2:
+
+## 4.3 Comparison with Lasso
+
 
 # 5. Contributions
 
