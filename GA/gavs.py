@@ -6,7 +6,7 @@ import statsmodels.api
 import numpy as np
 from numpy import ndarray
 
-from GA.utils import _CalculateFit, _CrossOver, _Mutation, _ParentSelection
+from .utils import _CalculateFit, _CrossOver, _Mutation, _ParentSelection
 
 class GA (_CalculateFit,
           _ParentSelection,
