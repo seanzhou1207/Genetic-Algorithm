@@ -81,12 +81,12 @@ The default genetic operators applied per generation are single split crossover 
 Lastly, our algorithm does not process the input data (no normalization or scaling of the data). This is something that user needs to do in advance.
 
 # 3. Testing
+The overall genetic algorithm was tested using simulated and actual datasets, including running OLS and logit models from the "How Couples Meet" and "Stay Together" survey as well as the baseball data set provided by Givens and Hoeting. The individual compoment functions of the algorithm were also tested in unit tests (see pytest test suite for details).
 
 # 4. Results
 
 ## 4.1 Example 1: Baseball data
-
-We first test the algorithm on the same dataset as used by Givens and Hoeting, the baseball salaries. 
+We first run the algorithm for the baseball salaries dataset. 
 
 \begin{center}
 \includegraphics[width=0.8\textwidth]{GA_results_plot_baseball.png}
@@ -94,7 +94,9 @@ We first test the algorithm on the same dataset as used by Givens and Hoeting, t
 
 One hundred generations of size 26 were used. The data set includes 27 predictors for the response variable "salary", so the individual chromosomes consist of 27 binary genes. The genetic operators applied were simple split crossover and a mutation rate of 1% applied independently for each chromosome and each gene position. A clear evolution or "survival of the fittest" can be observed in figure 1. The AIC of the best model was found to be around 5373.6.
 
-## 4.2 Example 2:
+## 4.2 Example 2: Synthetic data
+We also explored the algorithms performance on a simple simulated dataset. We draw samples from five independent uniform random variables $X_1, \cdots, X_5 \sim Unif(0,1)$. We then construct the response variable as: $y = 3 \times X_1 + 2 \times X_2 + \epsilon$, where $\epsilon$ is Gaussian noise. In this straightforward example, the GA identified predictors $X_1$ and $X_2$ as the only relevant features after 7 iterations using the default parametrization outlined above.
+
 
 ## 4.3 Comparison with Lasso
 Finally, the performance of the algorithm was compared to a Lasso regression (using the statsmodel package with regularization parameter $\alpha=0.1$). The Lasso method can perform variable selection by setting some of the coefficients to zero, which will "deselect" unimportant features.
