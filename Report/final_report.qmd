@@ -78,7 +78,7 @@ The theory suggests a population size P in the range of $C < P < 2C$, where C is
 
 The default genetic operators applied per generation are single split crossover and standard mutation. However, the user can also provide his own genetic operators (implemented on the full population) or modify the order of execution. In addition to the default crossover, a version with random allel selection from the parents is included in the package. The commonly used mutation probability of 1% is set as the default. 
 
-
+Lastly, our algorithm does not process the input data (no normalization or scaling of the data). This is something that user needs to do in advance.
 
 # 3. Testing
 

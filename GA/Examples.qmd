@@ -56,3 +56,29 @@ GA.final_pop_sorted, GA.final_fitness_val = GA.calc_fit_sort_population(final_po
 
 a,b = (GA.final_pop_sorted[0], GA.final_fitness_val[0])
 ```
+
+
+# Commparison with Lasso
+
+Pre-process the data:
+```{python}
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+X_scaled = sm.add_constant(X_scaled)
+X = sm.add_constant(X)
+```
+
+
+Fit Lasso model
+```{python}
+Lasso = sm.OLS(y, X).fit_regularized(method = "elastic_net", alpha = 0.1, L1_wt = 1)
+lasso_params= Lasso.params.sort_values()
+```
+
+
+```{python}
+import matplotlib.pyplot as plt
+import numpy as np
+plt.barh(lasso_params.index, np.abs(lasso_params.values), label = "Lasso", color = "seagreen", align = "center", alpha = 0.7)
+```
