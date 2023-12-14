@@ -10,7 +10,7 @@ Load dataset:
 import pandas as pd 
 import statsmodels.api as sm
 
-data = pd.read_csv("../GA/assets/baseball.dat", delimiter = ' ')
+data = pd.read_csv("./assets/baseball.dat", delimiter = ' ')
 
 X = data.drop("salary", axis = 1)
 y = data["salary"]
