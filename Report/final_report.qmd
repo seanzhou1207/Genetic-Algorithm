@@ -72,13 +72,13 @@ Each (sub-)step was implemented as a modular component. We decided to use an obj
 
 ## 2.2 Default parameter values and initialization
 
-Based on the theory of Givens and Hoeting and the examples outlined below, we have decided on certain default parameters. 
+Based on the theory of Givens and Hoeting and the examples in the next sections, we have decided on certain default parameters. 
 
 The theory suggests a population size P in the range of $C < P < 2C$, where C is the number of predictors (i.e. number of genes per chromosome). We chose the midpoint of this range as default value if no specific population size is given by the user: $P = 1.5 \times C$. As the population size should remain constant during the evolution of the algorithm and due to the crossover operation requiring an even number of chromosomes, an additional chromosome is added if the population size is odd (the user is informed about this modification). The initial population is fully randomized (random binary choice for all loci of all chromosomes).
 
 The default genetic operators applied per generation are single split crossover and standard mutation. However, the user can also provide his own genetic operators (implemented on the full population) or modify the order of execution. In addition to the default crossover, a version with random allel selection from the parents is included in the package. The commonly used mutation probability of 1% is set as the default. 
 
-Lastly, our algorithm does not process the input data (no normalization or scaling of the data). This is something that user needs to do in advance.
+Lastly, our algorithm does not process the input data (no normalization or scaling of the data). This is something that the user needs to do in advance.
 
 # 3. Testing
 The overall genetic algorithm was tested using simulated and actual datasets, including running OLS and logit models from the "How Couples Meet" and "Stay Together" survey as well as the baseball data set provided by Givens and Hoeting. The individual compoment functions of the algorithm were also tested in unit tests (see pytest test suite for details).
@@ -99,7 +99,7 @@ We also explored the algorithms performance on a simple simulated dataset. We dr
 
 
 ## 4.3 Comparison with Lasso
-Finally, the performance of the algorithm was compared to a Lasso regression (using the statsmodel package with regularization parameter $\alpha=0.1$). The Lasso method can perform variable selection by setting some of the coefficients to zero, which will "deselect" unimportant features.
+Finally, the performance of the algorithm was compared to a Lasso regression (using the statsmodel package with regularization parameter $\alpha=0.1$ on the baseball data). The Lasso method can perform variable selection by setting some of the coefficients to zero, which will "deselect" unimportant features.
 
 \begin{center}
 \includegraphics[width=0.7\textwidth]{Lasso_comparison.png}
