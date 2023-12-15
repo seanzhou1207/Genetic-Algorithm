@@ -28,7 +28,7 @@ class GA (_CalculateFit,
         # fitness_func = "AIC",
         starting_population: ndarray = None,  # type: ignore
         mutate_prob: float = 0.01,
-        save_sols: bool = False,
+        #save_sols: bool = False,
         random_seed: int = None,  # type: ignore
         ):
         """
@@ -41,32 +41,21 @@ class GA (_CalculateFit,
             pop_size: GA population size
             starting_population: if set use it as initial GA population
             mutate_prob: GA mutation probability
-            save_sols: ... TODO
             random_seed: random seed value
 
         examples:
         --------
-   ...: from GA import *
-   ...: import statsmodels.api as sm
-   ...: import numpy as np
-   ...: 
-   ...: spector_data = sm.datasets.spector.load()
-   ...: 
-   ...: X = spector_data.exog
-   ...: y = spector_data.endog
-   ...: 
-   ...: # Initialize GA class
-   ...: ga_1 = GA(X=X, y=y, mod=sm.OLS, max_iter=10, random_seed=1)
-   ...: 
-   ...: # Run GA under default operators
-   ...: final_pop, fit = ga_1.select()
-   ...: print(final_pop, fit)
+        ...: from GA import *
+        ...: import statsmodels.api as sm
+        ...: import numpy as np
 
-   ...: # Specify own operator, population size, and mutation probability
-   ...: operator = [GA.random_mutate, GA.random_mutate, GA.split_and_glue_population]
-   ...: ga_2 = GA(X=X, y=y, mod=sm.OLS, max_iter=10, pop_size = 4, mutate_prob=0.01, random_seed=12) TODO
-   ...: final_pop, fit = ga_2.select(operator)
-   ...: print(final_pop, fit)   
+        ...: spector_data = sm.datasets.spector.load()
+
+        ...: X = spector_data.exog
+        ...: y = spector_data.endog
+
+        ...: # Initialize GA class
+        ...: ga_1 = GA(X=X.values, y=y.values, mod=sm.OLS, max_iter=10, random_seed=1)
         """
         self.random_seed: int = random_seed
         if random_seed:
@@ -89,10 +78,10 @@ class GA (_CalculateFit,
         self.starting_population: ndarray = starting_population
         self.current_population = None
 
-        if save_sols == True:
-            self.solutions_matrix = np.zeros((self.max_iter, self.C))    # Pre-specify matrix for storing solutions
-        else:
-            pass
+        # if save_sols == True:
+        #     self.solutions_matrix = np.zeros((self.max_iter, self.C))    # Pre-specify matrix for storing solutions
+        # else:
+        #     pass
 
     def initialize_pop(self):
         """
@@ -118,7 +107,33 @@ class GA (_CalculateFit,
     def select(self, operator_list: List[Callable] = None):
         """
         Runs variable selection based on a user-defined genetic operator sequence: operator_list            
+        
+        examples:
+        --------
+        ...: from GA import *
+        ...: import statsmodels.api as sm
+        ...: import numpy as np
+
+        ...: spector_data = sm.datasets.spector.load()
+
+        ...: X = spector_data.exog
+        ...: y = spector_data.endog
+
+        ...: # Initialize GA class
+        ...: ga_1 = GA(X=X.values, y=y.values, mod=sm.OLS, max_iter=10, random_seed=1)
+
+        ...: # Run GA under default operators
+        ...: final_pop, fit = ga_1.select()
+        ...: print(final_pop, fit)
+
+        ...: # Specify own operator, population size, and mutation probability
+        ...: ga_2 = GA(X=X.values, y=y.values, mod=sm.OLS, max_iter=10, pop_size = 4, mutate_prob=0.01, random_seed=12)
+        ...: # Runs two mutations and a crossover
+        ...: operator = [ga_2.random_mutate, ga_2.random_mutate, ga_2.split_and_glue_population]    
+        ...: final_pop, fit = ga_2.select(operator)
+        ...: print(final_pop, fit)   
         """
+        
         """Set random seed"""
         random.seed(self.random_seed)
 
