@@ -1,7 +1,5 @@
 import random
-from functools import partial
 from typing import Callable, List
-import statsmodels.api
 
 import numpy as np
 from numpy import ndarray
@@ -106,7 +104,8 @@ class GA (_CalculateFit,
 
     def select(self, operator_list: List[Callable] = None):
         """
-        Runs variable selection based on a user-defined genetic operator sequence: operator_list            
+        Runs variable selection based on a user-defined genetic operator sequence: operator_list  
+        Returns most fit chromosome and its fitness score after last iteration          
         
         examples:
         --------
@@ -158,6 +157,8 @@ class GA (_CalculateFit,
             chrom_ranked, fitness_val = self.calc_fit_sort_population(current_pop)
             parents = self.select_from_fitness_rank(chrom_ranked)
             current_pop = parents    # update current_pop's chromosome
+
+            # Shows the most fit chromosome
             print(f"[iteration {i+1}] score: {fitness_val[0]:3.4f} | {chrom_ranked[0]}")
 
             # Runs genetic operator sequence
