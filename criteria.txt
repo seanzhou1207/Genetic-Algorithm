@@ -1,0 +1,63 @@
+Grade: 92
+
+Overall: Solid project; a few limitations noted below.
+
+## ease of accessing package, help, tests:
+
+Not initially clear how to use the package. 
+
+## main help page (select):
+
+Ok, though a bit more infromation about the arguments and the return value would be helpful.
+
+## quality of user interface (function arguments, flexibility):
+
+Would be helpful to have defaults for some arguments.
+
+Given use of OOP, it might make more sense to have args that control GA be args to `select` not to constructor, as you do for `operator_list`.
+
+Doesn't handle pandas dfs as input.
+
+Some flexibility, particularly with user-defined operators.
+
+No checking of user inputs.
+
+## performance on my tests:
+
+performance on baseball known: finds best model; 1 sec.
+performance on baseball full: finds best model; 1 sec.
+performance on big-p: finds an ok model; 260 sec.
+
+## testing
+
+Reasonable variety of tests, focusing on correct behavior of functions and overall selection.
+
+Tests pass.
+
+## writeup (including examples):
+
+Clear.
+
+Reasonable set of examples.
+
+You somewhat missed the point of the Lasso comparison. The idea is that the lasso will give you a set of candidate models and those can be compared (based on AIC from fitting those candidate models with OLS) to the GA-selected model.
+
+## code efficiency
+
+Good.
+
+## code organization/clarity/elegance:
+
+Not clear why it makes sense to have so many classes instead of a single class with various methods.
+
+Otherwise clear and easy to follow. 
+
+You return the best model from the last generation, but the best model might have been found in previous generations.
+
+## code comments/formatting:
+
+Good
+
+## equality of workload:
+
+Fine.
